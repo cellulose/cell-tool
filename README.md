@@ -15,7 +15,7 @@ that's pretty useful, if you ask me.
 
 # Usage
 
-	box help		shows this help message
-	box discover	find boxes on the network
-	box watch		watch multicast debug log
+	./box help		shows this help message
+	./box discover	find boxes on the network
+	./box watch		watch multicast debug log
 
