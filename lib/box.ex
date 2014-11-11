@@ -43,6 +43,19 @@ defmodule Box do
 		watch_mcast(socket)
   end
 
+	def main(["accept", ip]) do
+		HTTPotion.start
+		url = "http://#{ip}:80/nemo/sys/firmware/current"
+		resp = HTTPotion.put(url, "{\"status\":\"normal\"}", ["Content-Type": "application/json"])
+		case resp.status_code do
+			200 ->
+				Logger.info "Firmware accepted by device"
+			x ->
+				Logger.error "HTTP error #{inspect x}"
+				{:error, x}
+		end
+	end
+
   def main(other) do
 		cmd = Enum.join(other, " ")
 		IO.write "box - bad command: #{cmd}\n"
