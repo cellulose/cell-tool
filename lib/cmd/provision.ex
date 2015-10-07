@@ -16,21 +16,20 @@ defmodule Cmd.Provision do
 	@provision_dir "~/.cell/provision/"
 
 	@doc "Takes paramater(s) from Cmd.main to perform action"
-  def run(cspec, app_id) do
+  def run(cspec, app_id, args \\ []) do
 		HTTPotion.start
-    Finder.apply cspec, "Provisioning as '#{app_id}'", &(provision(&1, app_id))
+    Finder.apply cspec, "Provisioning as '#{app_id}'", &(provision(&1, app_id, args))
   end
 
-  defp provision(cell, app_id) do
+  defp provision(cell, app_id, args) do
     {:ok, services} = Jrtp.get_services(cell)
-		{_, config} = Code.eval_file("#{app_id}.exs", @provision_dir)
-    serial_number = services.root.serial_number
+    {_, config} = Code.eval_file("#{app_id}.exs", @provision_dir)
 
     # decide if activation/locking is required.  If so, call the custom
-    # lock function defined in the configuration, passing the serial#
+    # lock function defined in the configuration, passing the services info
 	  case config[:activate] do
 			f when is_function(f) ->
-				lock_blob = f.(serial_number)
+				lock_blob = f.(args ++ [services: services])
         lock_cell(cell, lock_blob)
       _ -> nil
     end
