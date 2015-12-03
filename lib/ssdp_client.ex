@@ -60,9 +60,15 @@ defmodule SsdpClient do
 
   defp ssdp_st do
     path = Path.expand "~/.cell/cell.conf"
-    case Conform.Parse.file(path) do
-      {:error, _} -> @default_ssdp_st
-      conf ->
+    conf = try do
+      Conform.Parse.file(path) 
+    rescue
+      err -> {:error, err}
+    end
+    case conf do
+      {:error, _} ->
+        @default_ssdp_st
+      {:ok, conf} ->
         case :proplists.get_value(['cell','ssdp_st'], conf) do
           :undefined -> @default_ssdp_st
           st -> st
