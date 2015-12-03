@@ -20,7 +20,7 @@ defmodule CellTool.Mixfile do
 		{:exjsx, "~> 3.0.0" },
 		{:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
 		{:httpotion, "~> 0.2.4"},
-                {:conform, github: "bitwalker/conform"}
+                {:conform, "~> 1.0.0-rc8"}
 	]
 
   defp version do
