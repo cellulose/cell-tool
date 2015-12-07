@@ -18,7 +18,7 @@ defmodule CellTool.Mixfile do
                 {:earmark, "~> 0.1", only: :dev},
                 {:ex_doc, "~> 0.7", only: :dev},
 		{:exjsx, "~> 3.0.0" },
-		{:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
+		{:ibrowse, "~> 4.2.2"},
 		{:httpotion, "~> 0.2.4"},
                 {:conform, github: "bitwalker/conform"}
 	]
