@@ -64,7 +64,7 @@ defmodule Finder do
     conf_path = Path.expand "~/.cell/cell.conf"
     case Conform.Parse.file(conf_path) do
       {:error, _} -> @default_service_path
-      conf ->
+      {:ok, conf} ->
         case :proplists.get_value(['cell','services_path'], conf) do
           :undefined -> @default_service_path
           st -> st
