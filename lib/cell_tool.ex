@@ -88,10 +88,10 @@ defmodule CellTool do
     h: :help,
     o: :options
   ]
-  
+
   defp argv_to_dict(args) do
     args = String.split(args, ",")
-    {args, _} = Enum.flat_map_reduce(args, [], fn(x, acc) -> 
+    {args, _} = Enum.flat_map_reduce(args, [], fn(x, acc) ->
       case String.split(x, "=") do
         [k, v] -> {["#{k}": v], acc}
         _ -> {:halt, acc}

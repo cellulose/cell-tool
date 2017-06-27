@@ -5,9 +5,9 @@ defmodule CellTool.Mixfile do
   def project do
     [app: :celltool,
      escript: [main_module: CellTool, name: "cell", path: "/usr/local/bin/cell"],
-     version: version,
-     elixir: "~> 1.0",
-     deps: deps]
+     version: "0.2.4",
+     elixir: "~> 1.4",
+     deps: deps()]
   end
 
   def application, do: [
@@ -15,18 +15,9 @@ defmodule CellTool.Mixfile do
   ]
 
   defp deps, do: [
-                {:earmark, "~> 0.1", only: :dev},
-                {:ex_doc, "~> 0.7", only: :dev},
-		{:exjsx, "~> 3.0.0" },
-		{:ibrowse, github: "cmullaparthi/ibrowse", tag: "v4.1.0"},
-		{:httpotion, "~> 0.2.4"},
-                {:conform, github: "bitwalker/conform"}
-	]
+    {:exjsx, "~> 3.2" },
+    {:httpotion, "~> 3.0"},
+    {:conform, "~> 2.3"}
+  ]
 
-  defp version do
-    case File.read("VERSION") do
-      {:ok, ver} -> String.strip ver
-      _ -> "0.0.0-dev"
-    end
-  end
 end

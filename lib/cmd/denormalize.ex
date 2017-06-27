@@ -15,7 +15,7 @@ defmodule Cmd.Denormalize do
 		location = cell.location
 		url = Path.join location, "/sys/firmware/current"
     IO.write "#{cell.name} -> "
-		resp = HTTPotion.put(url, "{\"status\":\"provisional\"}", ["Content-Type": "application/json"])
+		resp = HTTPotion.put url, body: "{\"status\":\"provisional\"}", headers: ["Content-Type": "application/json"]
 		case resp.status_code do
 			200 ->  IO.write "ok\n"
       400 ->  IO.write "already provisional\n"

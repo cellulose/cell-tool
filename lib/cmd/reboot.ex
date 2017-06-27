@@ -11,7 +11,7 @@ defmodule Cmd.Reboot do
 		location = cell.location
 		url = location<>"sys/firmware/reboot"
     IO.write "reboot enable: #{location} -> "
-		resp = HTTPotion.put(url, "{\"enable_reboot\": \"true\"}", ["Content-Type": "application/json"])
+		resp = HTTPotion.put url, body: "{\"enable_reboot\": \"true\"}", headers: ["Content-Type": "application/json"]
 		case resp.status_code do
 			200 ->
         IO.write "enabled\n"
@@ -25,7 +25,7 @@ defmodule Cmd.Reboot do
 		location = cell.location
 		url = location<>"sys/firmware/reboot"
     IO.write "rebooting:"
-		resp = HTTPotion.put(url, "{\"execute_reboot\": \"true\"}", ["Content-Type": "application/json"])
+		resp = HTTPotion.put url, body: "{\"execute_reboot\": \"true\"}", headers: ["Content-Type": "application/json"]
 		case resp.status_code do
 			200 ->
         IO.write "ok\n"

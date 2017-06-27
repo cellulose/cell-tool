@@ -7,13 +7,13 @@ defmodule Cmd.Ip do
   end
 
   defp setip(cell, ip, mask, router) do
-		url = Path.join cell.location, "/sys/ip/static"
+    url = Path.join cell.location, "/sys/ip/static"
     IO.write "#{cell.name} -> #{params(ip, mask, router)}"
-		resp = HTTPotion.put(url, params(ip, mask, router), ["Content-Type": "application/json"])
+		resp = HTTPotion.put url, body: params(ip, mask, router), headers: ["Content-Type": "application/json"]
 		case resp.status_code do
-			200 ->  IO.write "ok\n"
+      200 ->  IO.write "ok\n"
       400 ->  IO.write "ERROR\n"
-			x ->    IO.write "FAILED (ERROR #{x})\n"
+      x ->    IO.write "FAILED (ERROR #{x})\n"
 		end
 	end
 

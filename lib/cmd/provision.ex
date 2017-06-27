@@ -38,7 +38,7 @@ defmodule Cmd.Provision do
 
   defp lock_cell(cell, lock_blob) do
 		url = Path.join(cell.location, @lock_path)
-		resp = HTTPotion.put(url, lock_blob, ["Content-Type": @lock_mime], timeout: @lock_timeout)
+	  resp = HTTPotion.put url, body: lock_blob, headers: ["Content-Type": @lock_mime], timeout: @lock_timeout
 		case resp.status_code do
 			201 ->  IO.write "ok\n"
       204 ->  IO.write "ok\n"
